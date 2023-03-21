@@ -10,7 +10,10 @@ from openai.embeddings_utils import (
 )
 import praw
 from csv import writer
-from auth import auth
+from config import (
+    auth,
+    subreddit
+)
 
 # listens for new posts, adds them to the CSV dataset, then vectorizes the post content and finds the nearest neighbor posts.
 
@@ -107,7 +110,7 @@ reddit = praw.Reddit(
 )
 
 # create a listener for new posts, when one is found save that posts content to the dataset and find recommendations
-for submission in reddit.subreddit("visitinghawaii").stream.submissions(skip_existing=True):
+for submission in reddit.subreddit(subreddit).stream.submissions(skip_existing=True):
     output = get_submission_output(submission)
     save_submission(output)
     dataset_path = "./posts.csv"

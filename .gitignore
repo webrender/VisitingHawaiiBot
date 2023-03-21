@@ -1,6 +1,6 @@
 __pycache__/
 .DS_Store
-auth.py
+config.py
 posts.csv
 vectors.pkl
 .requirements.txt.swp

@@ -1,7 +1,10 @@
 import praw
 from pmaw import PushshiftAPI
 from csv import writer
-from auth import auth
+from config import (
+    auth,
+    subreddit
+)
 
 # Pulls all active posts from subreddit and saves to CSV for processing
 
@@ -29,7 +32,7 @@ def save_submission(output):
 reddit = praw.Reddit(user_agent=auth['user_agent'], client_id=auth['client_id'],
     client_secret=auth['secret_id'])
 api = PushshiftAPI(praw=reddit)
-submissions = api.search_submissions(subreddit='visitinghawaii')
+submissions = api.search_submissions(subreddit=subreddit)
 
 # create/erase CSV - we don't want to include deleted posts in our dataset
 open('posts.csv', 'w').close()

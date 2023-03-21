@@ -8,3 +8,4 @@ auth = {
     # OpenAI credentials
     "openai_key": ""
 }
+subreddit = ''
