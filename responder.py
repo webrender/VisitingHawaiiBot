@@ -97,7 +97,7 @@ reddit = praw.Reddit(
     password=auth['password']
 )
 
-for submission in reddit.subreddit("webrenderdev").stream.submissions(skip_existing=True):
+for submission in reddit.subreddit("visitinghawaii").stream.submissions(skip_existing=True):
     output = get_submission_output(submission)
     save_submission(output)
     dataset_path = "./posts.csv"
