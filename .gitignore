@@ -3,3 +3,4 @@ __pycache__/
 auth.py
 posts.csv
 vectors.pkl
+.requirements.txt.swp
