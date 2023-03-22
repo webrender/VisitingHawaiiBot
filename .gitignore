@@ -1,6 +1,6 @@
 __pycache__/
 .DS_Store
 config.py
-posts.csv
-vectors.pkl
+posts-*.csv
+vectors-*.pkl
 .requirements.txt.swp
