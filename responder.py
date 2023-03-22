@@ -86,9 +86,9 @@ def print_recommendations_from_strings(
 # format the post details for inclusion in the CSV dataset
 def get_submission_output(submission):
     return [
-        submission['title'] + " " + submission['selftext'],
-        submission['title'],
-        submission['url']
+        submission.title + " " + submission.selftext,
+        submission.title,
+        submission.url
     ]
 
 # saves a new row to the CSV dataset
@@ -110,13 +110,13 @@ reddit = praw.Reddit(
 # create a listener for new posts, when one is found save that posts content to the dataset and find recommendations
 for submission in reddit.subreddit(subreddit).stream.submissions(skip_existing=True):
     if (
-        submission['removed_by_category'] is None and 
-        submission['link_flair_text'] is not None and 
-        submission['link_flair_text'] != "Mod Message"
+        submission.removed_by_category is None and 
+        submission.link_flair_text is not None and 
+        submission.link_flair_text != "Mod Message"
     ):
         output = get_submission_output(submission)
-        save_submission(output, submission['link_flair_text'])
-        dataset_path = f"posts-{submission['link_flair_text']}.csv"
+        save_submission(output, submission.link_flair_text)
+        dataset_path = f"posts-{submission.link_flair_text}.csv"
         df = pd.read_csv(dataset_path)
         article_descriptions = df["text"].tolist()
         article_titles = df["title"].tolist()
@@ -127,7 +127,7 @@ for submission in reddit.subreddit(subreddit).stream.submissions(skip_existing=T
             urls=article_urls,
             index_of_source_string=-1,
             k_nearest_neighbors=3,
-            link_flair_text=submission['link_flair_text'],
+            link_flair_text=submission.link_flair_text,
             submission=submission,
         )
 
